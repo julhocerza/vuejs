@@ -3,11 +3,11 @@
 </template>
 
 <script>
-//import { mapState } from 'vuex';
+import { mapState } from 'vuex';
 
 export default {
-    name: 'Menu-menu'
-    //computed: mapState(['isMenuVisible'])
+    name: 'Menu-menu',
+    computed: mapState(['isMenuVisible'])
 }
 </script>
 

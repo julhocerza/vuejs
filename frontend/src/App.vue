@@ -1,6 +1,6 @@
 <template>
-  <div id="app">
-    <HeaderHead title="Base de Conhecimento" :hiddleToggle="false"/>
+  <div id="app" :class="{'hide-menu': !isMenuVisible}">
+    <HeaderHead title="Base de Conhecimento" :hiddleToggle="false" :hideUserDropDown="false"/>
     <MenuMenu/>
     <ContentVue/>
     <FooterFoot/>
@@ -8,13 +8,15 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
 import HeaderHead from './components/template/Header-head.vue';
 import MenuMenu from './components/template/Menu-menu.vue';
 import ContentVue from './components/template/Content-vue.vue';
 import FooterFoot from './components/template/Footer-foot.vue';
 export default {
   name: 'App',
-  components: { HeaderHead, MenuMenu, ContentVue, FooterFoot }
+  components: { HeaderHead, MenuMenu, ContentVue, FooterFoot },
+  computed: mapState(['isMenuVisible'])
 }
 </script>
 
@@ -32,7 +34,6 @@ body {
   -moz-osx-font-smoothing: grayscale;
 
   height: 100vh;
-  width: 198vh;
   display: grid;
   grid-template-rows: 60px 1fr 50px;
   grid-template-columns: 300px 1fr;
@@ -40,5 +41,12 @@ body {
     "header header"
     "menu content"
     "menu footer";
+}
+
+#app.hide-menu {
+  grid-template-areas:
+    "header header"
+    "content content"
+    "footer footer";
 }
 </style>

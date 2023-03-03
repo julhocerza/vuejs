@@ -3,27 +3,34 @@
         <a class="toggle" @click="toggleMenu" v-if="!hideToggle">
             <i class="fa fa-lg" :class="icon"></i>
         </a>
-        <h1 class="title">{{ title }}</h1>
+        <h1 class="title">
+            <router-link to="/"> {{ title }}</router-link>
+        </h1>
+        <UserDropDown v-if="!hideUserDropDown"/>
     </header>
 </template>
 
 <script>
+import UserDropDown from './UserDropDown.vue';
+
 export default {
     name: 'Header-head',
+    components: { UserDropDown },
     props: {
         title: String,
-        hideToggle: Boolean
+        hideToggle: Boolean,
+        hideUserDropDown: Boolean
     },
     computed: {
         icon() {
-            return "fa-angle-left"
+            return this.$store.state.isMenuVisible ? "fa-angle-left" : "fa-angle-down"
         }
-    }
-    /* methods: {
+    },
+    methods: {
         toggleMenu() {
             this.$store.commit('toggleMenu')
-        } 
-    }*/
+        }
+    }
 }
 </script>
 
@@ -49,6 +56,11 @@ export default {
         text-decoration: none;
     }
 
+    .title a:hover {
+        color: #fff;
+        text-decoration: none;
+    }
+
     header.header > a.toggle {
         width: 60px;
         height: 100%;
@@ -61,6 +73,7 @@ export default {
     }
 
     header.header > a.toggle:hover {
+        color: #fff;
         background-color: rgb(0, 0, 0, 0.2);
     }
 </style>

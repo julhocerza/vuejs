@@ -1,21 +1,26 @@
-import { createStore } from "vuex";
+import Vue from 'vue'
+import Vuex from 'vuex'
 
-const store = createStore({
+Vue.use(Vuex)
+
+export default new Vuex.Store({
     state: {
-        isMenuVisible: true
+        isMenuVisible: true,
+        user: {
+            name: 'Usuário Mock',
+            email: 'mock@gmail.com'
+        }
     },
     mutations: {
         toggleMenu(state, isVisible) {
             if(isVisible === undefined) {
-                state.isMenuVisible = !state.isMenuVisible
-            } else {
-                state.isMenuVisible = isVisible
-            }
+            state.isMenuVisible = !state.isMenuVisible
+        } else {
+            state.isMenuVisible = isVisible
         }
     }
+}
 })
-
-export default {store}
 
 
 
